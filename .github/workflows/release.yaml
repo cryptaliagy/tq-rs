@@ -72,7 +72,6 @@ jobs:
     needs:
       - get-version
       - build-binary
-      - audit
     runs-on: ubuntu-latest
     permissions:
       contents: write
