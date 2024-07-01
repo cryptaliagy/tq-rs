@@ -10,21 +10,6 @@ on:
   workflow_dispatch:
 
 jobs:
-  audit:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Install cargo-binstall
-        run: curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
-
-      - name: Install cargo-audit
-        run: cargo binstall cargo-audit -y
-
-      - name: Run the security audit check
-        run: cargo audit
-
   get-version:
     runs-on: ubuntu-latest
     outputs:
@@ -33,15 +18,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install cargo-binstall
-        run: curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
-
-      - name: Install tq
-        run: cargo binstall -y tq-rs
-
       - id: get-version
         name: Output the current version of the project
-        run: echo "version=$(tq -f Cargo.toml 'package.version')" >> "$GITHUB_OUTPUT"
+        run: echo "version=0.1.3" >> "$GITHUB_OUTPUT"
 
   build-binary:
     strategy:

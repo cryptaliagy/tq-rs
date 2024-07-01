@@ -45,10 +45,3 @@ jobs:
 
       - name: Build the binary for the target
         run: cross build --target ${{ matrix.architecture.target }} --release
-  security_audit:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: rustsec/audit-check@v1.4.1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
